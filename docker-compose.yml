@@ -4,6 +4,7 @@ services:
     image: mongo
     ports:
       - '27017:27017'
+    restart: always
   service-commande:
     build:
       context: ./service-commande
@@ -11,11 +12,13 @@ services:
       - '3000:3000'
     depends_on:
       - mongo
+    restart: on-failure
   service-paiement:
     build:
       context: ./service-paiement
     ports:
       - '3001:3001'
+    restart: on-failure
   service-stock:
     build:
       context: ./service-stock
@@ -23,8 +26,10 @@ services:
       - '3002:3002'
     depends_on:
       - mongo
+    restart: on-failure
   service-notification:
     build:
       context: ./service-notification
     ports:
       - '3003:3003'
+    restart: on-failure
