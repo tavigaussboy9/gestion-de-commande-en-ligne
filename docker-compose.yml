@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+  service-commande:
+    build:
+      context: ./service-commande
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+  service-paiement:
+    build:
+      context: ./service-paiement
+    ports:
+      - '3001:3001'
+  service-stock:
+    build:
+      context: ./service-stock
+    ports:
+      - '3002:3002'
+    depends_on:
+      - mongo
+  service-notification:
+    build:
+      context: ./service-notification
+    ports:
+      - '3003:3003'
